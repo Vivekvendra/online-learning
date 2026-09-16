@@ -1,4 +1,3 @@
-import React from 'react';
 import { TrendingUp, Clock, Flame } from 'lucide-react';
 
 export const LearningChart = () => {
@@ -26,7 +25,6 @@ export const LearningChart = () => {
           </div>
         </div>
 
-        {/* Stats summary pills */}
         <div className="grid grid-cols-2 gap-3 my-4">
           <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center gap-3">
             <div className="p-2 bg-indigo-100 text-indigo-600 rounded-lg">
@@ -49,7 +47,6 @@ export const LearningChart = () => {
         </div>
       </div>
 
-      {/* Bar graph visual */}
       <div className="pt-2">
         <div className="flex items-end justify-between gap-2 h-36 pt-4 px-2">
           {WEEK_DAYS.map((d) => (

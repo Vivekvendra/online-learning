@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
   Menu,
   Search,
   Bell,
   LogOut,
-  GraduationCap,
   PlusCircle,
-  ExternalLink,
   ChevronDown
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import { Button } from '../common/Button';
 
 export const Navbar = ({ onOpenSidebar }) => {
@@ -34,7 +32,6 @@ export const Navbar = ({ onOpenSidebar }) => {
 
   return (
     <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-slate-200 bg-white/95 px-4 sm:px-6 backdrop-blur-md">
-      {/* Left: Mobile Drawer Trigger + Search */}
       <div className="flex items-center gap-4 flex-1">
         <button
           type="button"
@@ -59,7 +56,6 @@ export const Navbar = ({ onOpenSidebar }) => {
         </form>
       </div>
 
-      {/* Right: Quick actions, notifications, user avatar */}
       <div className="flex items-center gap-3">
         <Link to="/courses">
           <Button
@@ -72,7 +68,6 @@ export const Navbar = ({ onOpenSidebar }) => {
           </Button>
         </Link>
 
-        {/* Notifications Popover Toggle */}
         <div className="relative">
           <button
             onClick={() => {
@@ -108,7 +103,6 @@ export const Navbar = ({ onOpenSidebar }) => {
           )}
         </div>
 
-        {/* User Profile Menu */}
         <div className="relative">
           <button
             onClick={() => {

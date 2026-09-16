@@ -1,8 +1,7 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { GraduationCap, Mail, Lock, ArrowRight, ShieldCheck, Sparkles } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import { Input } from '../../components/common/Input';
 import { Button } from '../../components/common/Button';
 
@@ -41,7 +40,6 @@ export const LoginPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md">
-        {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 mb-4">
             <GraduationCap className="h-8 w-8" />
@@ -54,7 +52,6 @@ export const LoginPage = () => {
           </p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100/10">
           <h2 className="text-xl font-bold text-slate-900 mb-1">Welcome Back</h2>
           <p className="text-xs text-slate-500 mb-6">Enter your email and password to continue</p>
@@ -124,7 +121,6 @@ export const LoginPage = () => {
             </Button>
           </form>
 
-          {/* Quick Demo Credentials Autofill */}
           <div className="mt-6 pt-6 border-t border-slate-100">
             <div className="flex items-center justify-between mb-3">
               <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
@@ -152,7 +148,6 @@ export const LoginPage = () => {
             </div>
           </div>
 
-          {/* Register Prompt */}
           <div className="mt-6 text-center text-xs text-slate-500">
             Don't have an account yet?{' '}
             <Link to="/register" className="font-bold text-indigo-600 hover:text-indigo-700 hover:underline">
@@ -161,7 +156,6 @@ export const LoginPage = () => {
           </div>
         </div>
 
-        {/* Footer Note */}
         <p className="text-center text-xs text-slate-500 mt-6 flex items-center justify-center gap-1.5">
           <ShieldCheck className="w-4 h-4 text-emerald-400" />
           Protected by Stackly LMS Security & Local Storage Sync

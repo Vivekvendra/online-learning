@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   BookOpen,
@@ -7,10 +6,9 @@ import {
   BookmarkCheck,
   CheckCircle2,
   Sparkles,
-  ArrowRight,
-  TrendingUp
+  ArrowRight
 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import { StatCard } from '../../components/dashboard/StatCard';
 import { UpcomingClasses } from '../../components/dashboard/UpcomingClasses';
 import { RecentActivities } from '../../components/dashboard/RecentActivities';
@@ -21,7 +19,6 @@ import { Button } from '../../components/common/Button';
 export const DashboardPage = () => {
   const { user } = useAuth();
 
-  // Metrics (configured as specified in Module 2)
   const stats = [
     {
       title: 'Total Courses',
@@ -72,7 +69,6 @@ export const DashboardPage = () => {
 
   return (
     <div className="space-y-8">
-      {/* Hero Welcome Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 p-6 sm:p-8 text-white shadow-xl">
         <div className="relative z-10 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-indigo-200 text-xs font-semibold mb-3 border border-white/10">
@@ -110,11 +106,9 @@ export const DashboardPage = () => {
           </div>
         </div>
 
-        {/* Decorative background circle */}
         <div className="absolute right-0 top-0 -mt-12 -mr-12 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
       </div>
 
-      {/* Module 2: Key Statistics Cards */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
@@ -130,7 +124,6 @@ export const DashboardPage = () => {
         </div>
       </div>
 
-      {/* Quick Action Cards */}
       <div>
         <div className="flex items-center justify-between mb-3">
           <h2 className="text-lg font-black text-slate-900">Quick Actions</h2>
@@ -139,13 +132,11 @@ export const DashboardPage = () => {
         <QuickActions />
       </div>
 
-      {/* Analytics & Classes Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <LearningChart />
         <UpcomingClasses />
       </div>
 
-      {/* Recent Activities Feed */}
       <div>
         <RecentActivities />
       </div>

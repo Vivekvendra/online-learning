@@ -1,8 +1,7 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import { GraduationCap, Mail, Lock, User, ShieldCheck, ArrowRight } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { GraduationCap, Mail, Lock, User, ArrowRight } from 'lucide-react';
+import { useAuth } from '../../hooks/useAuth';
 import { Input } from '../../components/common/Input';
 import { Button } from '../../components/common/Button';
 
@@ -13,7 +12,7 @@ export const RegisterPage = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    getValues,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -25,8 +24,6 @@ export const RegisterPage = () => {
       terms: true
     }
   });
-
-  const passwordValue = watch('password');
 
   const onSubmit = async (data) => {
     const res = await registerUser({
@@ -43,7 +40,6 @@ export const RegisterPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md">
-        {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 mb-4">
             <GraduationCap className="h-8 w-8" />
@@ -56,7 +52,6 @@ export const RegisterPage = () => {
           </p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100/10">
           <h2 className="text-xl font-bold text-slate-900 mb-1">Create Account</h2>
           <p className="text-xs text-slate-500 mb-6">Enter your details to get started with Stackly LMS</p>
@@ -91,7 +86,6 @@ export const RegisterPage = () => {
               })}
             />
 
-            {/* Role Selection */}
             <div>
               <label className="block text-xs font-semibold text-slate-700 mb-1.5 uppercase tracking-wider">
                 Select Your Role <span className="text-rose-500">*</span>
@@ -152,7 +146,7 @@ export const RegisterPage = () => {
               {...register('confirmPassword', {
                 required: 'Please confirm your password',
                 validate: (value) =>
-                  value === passwordValue || 'Passwords do not match'
+                  value === getValues('password') || 'Passwords do not match'
               })}
             />
 
@@ -187,7 +181,6 @@ export const RegisterPage = () => {
             </Button>
           </form>
 
-          {/* Login Prompt */}
           <div className="mt-6 text-center text-xs text-slate-500">
             Already have an account?{' '}
             <Link to="/login" className="font-bold text-indigo-600 hover:text-indigo-700 hover:underline">

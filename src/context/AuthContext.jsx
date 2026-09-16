@@ -1,12 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { storage } from '../utils/storage';
 import { DEMO_USERS } from '../utils/constants';
-
-const AuthContext = createContext(null);
+import { AuthContext } from './authContextDef';
 
 export const AuthProvider = ({ children }) => {
-  // Initialize registered users from storage or defaults
   const [users, setUsers] = useState(() => {
     const saved = storage.get('lms_users');
     if (saved && Array.isArray(saved) && saved.length > 0) {
@@ -16,19 +14,16 @@ export const AuthProvider = ({ children }) => {
     return DEMO_USERS;
   });
 
-  // Current active user session
   const [user, setUser] = useState(() => {
     return storage.get('lms_auth_user', null);
   });
 
   const [loading, setLoading] = useState(false);
 
-  // Sync users list to storage
   useEffect(() => {
     storage.set('lms_users', users);
   }, [users]);
 
-  // Sync current user to storage
   useEffect(() => {
     if (user) {
       storage.set('lms_auth_user', user);
@@ -37,10 +32,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, [user]);
 
-  // Login handler
   const login = async (email, password, rememberMe = true) => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 600)); // simulated async delay
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const normalizedEmail = email.trim().toLowerCase();
     const existing = users.find(
@@ -71,10 +65,9 @@ export const AuthProvider = ({ children }) => {
     return { success: false, message: 'Invalid email or password' };
   };
 
-  // Register handler
   const register = async (userData) => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const normalizedEmail = userData.email.trim().toLowerCase();
     const existing = users.find((u) => u.email.toLowerCase() === normalizedEmail);
@@ -117,26 +110,23 @@ export const AuthProvider = ({ children }) => {
     return { success: true, user: authUser };
   };
 
-  // Forgot password handler
   const forgotPassword = async (email) => {
     setLoading(true);
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => setTimeout(resolve, 500));
 
     const normalizedEmail = email.trim().toLowerCase();
     const existing = users.find((u) => u.email.toLowerCase() === normalizedEmail);
 
     setLoading(false);
     if (existing) {
-      toast.success(`Password reset link has been dispatched to ${normalizedEmail}.`);
+      toast.success(`Password reset instructions sent to ${normalizedEmail}.`);
       return { success: true };
     }
 
-    // For security reasons, don't expose if email doesn't exist, but inform user
-    toast.info('If that email exists in our system, a reset link was sent.');
+    toast.info('If that email exists in our records, instructions were dispatched.');
     return { success: true };
   };
 
-  // Logout handler
   const logout = () => {
     setUser(null);
     storage.remove('lms_auth_user');
@@ -159,12 +149,4 @@ export const AuthProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within an AuthProvider');
-  }
-  return context;
 };

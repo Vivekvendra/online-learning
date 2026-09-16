@@ -1,4 +1,3 @@
-import React from 'react';
 import { UserCheck, BookOpen, Award, CheckCircle, FileText } from 'lucide-react';
 
 const ACTIVITIES_DATA = [

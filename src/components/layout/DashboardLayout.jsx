@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { Navbar } from './Navbar';
@@ -8,13 +8,11 @@ export const DashboardLayout = () => {
 
   return (
     <div className="flex min-h-screen bg-slate-50/70 text-slate-900">
-      {/* Sidebar */}
       <Sidebar
         isOpen={isMobileSidebarOpen}
         onClose={() => setIsMobileSidebarOpen(false)}
       />
 
-      {/* Main Content Area */}
       <div className="flex flex-1 flex-col min-w-0 overflow-hidden">
         <Navbar onOpenSidebar={() => setIsMobileSidebarOpen(true)} />
         

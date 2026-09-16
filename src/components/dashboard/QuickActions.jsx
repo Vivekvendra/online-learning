@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookPlus, Compass, BookOpenCheck, BarChart2, Sparkles } from 'lucide-react';
+import { BookPlus, Compass, BookOpenCheck, BarChart2 } from 'lucide-react';
 
 export const QuickActions = ({ onOpenAddCourse }) => {
   const actions = [

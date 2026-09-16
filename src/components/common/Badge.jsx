@@ -1,5 +1,3 @@
-import React from 'react';
-
 const VARIANTS = {
   indigo: 'bg-indigo-50 text-indigo-700 border-indigo-200',
   emerald: 'bg-emerald-50 text-emerald-700 border-emerald-200',
@@ -11,7 +9,6 @@ const VARIANTS = {
 };
 
 export const Badge = ({ children, variant = 'indigo', className = '' }) => {
-  // auto-assign variants based on common level or status terms
   let resolvedVariant = variant;
   if (typeof children === 'string') {
     const text = children.toLowerCase();

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { GraduationCap, Mail, ArrowLeft, KeyRound, CheckCircle2 } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import { Input } from '../../components/common/Input';
 import { Button } from '../../components/common/Button';
 
@@ -26,7 +26,6 @@ export const ForgotPasswordPage = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-4 sm:p-6 lg:p-8">
       <div className="w-full max-w-md">
-        {/* Brand Header */}
         <div className="text-center mb-8">
           <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 mb-4">
             <GraduationCap className="h-8 w-8" />
@@ -39,7 +38,6 @@ export const ForgotPasswordPage = () => {
           </p>
         </div>
 
-        {/* Card */}
         <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100/10">
           {submittedEmail ? (
             <div className="text-center py-4">

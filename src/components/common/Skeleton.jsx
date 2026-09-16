@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Skeleton = ({ className = '', variant = 'rect' }) => {
   const variantClass = variant === 'circle' ? 'rounded-full' : 'rounded-lg';
   return (

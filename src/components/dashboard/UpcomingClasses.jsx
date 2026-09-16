@@ -1,5 +1,4 @@
-import React from 'react';
-import { Calendar, Clock, Video, ExternalLink } from 'lucide-react';
+import { Clock, Video, ExternalLink } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { Badge } from '../common/Badge';
 import { Button } from '../common/Button';
