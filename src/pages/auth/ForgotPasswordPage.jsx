@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
-import { GraduationCap, Mail, ArrowLeft, KeyRound, CheckCircle2 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
-import { Input } from '../../components/common/Input';
-import { Button } from '../../components/common/Button';
+import { LoginIllustration } from '../../components/auth/LoginIllustration';
 
 export const ForgotPasswordPage = () => {
   const { forgotPassword, loading } = useAuth();
@@ -24,94 +22,105 @@ export const ForgotPasswordPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-4 sm:p-6 lg:p-8">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <div className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-600 text-white shadow-lg shadow-indigo-500/30 mb-4">
-            <GraduationCap className="h-8 w-8" />
-          </div>
-          <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-            Stackly<span className="text-indigo-400">LMS</span>
-          </h1>
-          <p className="text-sm text-slate-400 mt-2">
-            Reset and recover your account access
-          </p>
+    <div className="min-h-screen w-full flex items-center justify-center bg-[#6355ec] p-4 sm:p-6 lg:p-10 relative overflow-hidden">
+      <div className="absolute top-10 left-12 w-8 h-8 text-[#00d2d3] opacity-80 pointer-events-none">
+        <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8">
+          <polygon points="12,2 22,22 2,22" />
+        </svg>
+      </div>
+
+      <div className="relative z-10 w-full max-w-5xl bg-white rounded-[32px] sm:rounded-[36px] shadow-2xl shadow-indigo-950/30 p-6 sm:p-10 lg:p-12 flex flex-col justify-between min-h-[580px]">
+        <div className="flex items-center justify-between pb-6">
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="relative w-8 h-8 rounded-full border-2 border-[#00d2d3] flex items-center justify-center">
+              <span className="text-sm font-black text-[#6355ec]">G</span>
+            </div>
+            <span className="text-xl sm:text-2xl font-black tracking-tight text-slate-800">
+              QLTS<span className="text-[#00d2d3]">Geek</span>
+            </span>
+          </Link>
+
+          <Link
+            to="/login"
+            className="px-6 py-1.5 text-xs sm:text-sm font-semibold text-slate-500 hover:text-[#6355ec] border border-slate-200 hover:border-[#6355ec] rounded-full transition-colors"
+          >
+            Back to Login
+          </Link>
         </div>
 
-        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-100/10">
-          {submittedEmail ? (
-            <div className="text-center py-4">
-              <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <CheckCircle2 className="w-9 h-9" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center py-4">
+          <div className="lg:col-span-6 max-w-md w-full mx-auto lg:mx-0">
+            {submittedEmail ? (
+              <div className="space-y-4">
+                <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold text-xl">
+                  ✓
+                </div>
+                <h2 className="text-xl font-black text-slate-800">Instructions Dispatched</h2>
+                <p className="text-xs text-slate-500 leading-relaxed">
+                  We sent password reset guidance to <strong className="text-slate-800">{submittedEmail}</strong>. Check your inbox and follow the steps provided.
+                </p>
+                <div className="pt-2">
+                  <Link
+                    to="/login"
+                    className="inline-block px-8 py-2.5 rounded-full bg-[#6355ec] hover:bg-[#5244dc] text-white text-sm font-semibold shadow-md transition-colors"
+                  >
+                    Return to Login
+                  </Link>
+                </div>
               </div>
-              <h2 className="text-xl font-bold text-slate-900 mb-2">Check Your Email</h2>
-              <p className="text-xs text-slate-600 leading-relaxed mb-6">
-                We sent a password reset link to <strong className="text-slate-900 font-semibold">{submittedEmail}</strong>. Follow the link in the message to set up your new credentials.
-              </p>
-              <div className="space-y-3">
-                <Button
-                  variant="outline"
-                  className="w-full"
-                  onClick={() => setSubmittedEmail(null)}
-                >
-                  Send to another email
-                </Button>
-                <Link to="/login" className="block w-full">
-                  <Button variant="primary" className="w-full" icon={ArrowLeft}>
-                    Return to Sign In
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          ) : (
-            <div>
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-4">
-                <KeyRound className="w-6 h-6" />
-              </div>
-              <h2 className="text-xl font-bold text-slate-900 mb-1">Forgot Password?</h2>
-              <p className="text-xs text-slate-500 mb-6">
-                Don't worry! Enter your email address and we'll send you an instant reset notification.
-              </p>
+            ) : (
+              <div>
+                <h2 className="text-xl font-black text-slate-800 mb-1">Reset Password</h2>
+                <p className="text-xs text-slate-400 mb-6">Enter your registered email to receive reset instructions</p>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-                <Input
-                  label="Registered Email"
-                  type="email"
-                  placeholder="you@domain.com"
-                  icon={Mail}
-                  required
-                  error={errors.email?.message}
-                  {...register('email', {
-                    required: 'Email address is required',
-                    pattern: {
-                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                      message: 'Please enter a valid email address'
-                    }
-                  })}
-                />
+                <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Your Email"
+                      className="w-full px-5 py-3.5 rounded-xl bg-[#f8f9fd] border border-slate-100 text-sm text-slate-800 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#6355ec]"
+                      {...register('email', {
+                        required: 'Please enter your email',
+                        pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: 'Valid email required' }
+                      })}
+                    />
+                    {errors.email && <p className="mt-1 text-xs text-rose-500">{errors.email.message}</p>}
+                  </div>
 
-                <Button
-                  type="submit"
-                  variant="primary"
-                  size="lg"
-                  className="w-full mt-2"
-                  isLoading={loading}
-                >
-                  Send Reset Instructions
-                </Button>
-              </form>
-
-              <div className="mt-6 text-center">
-                <Link
-                  to="/login"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-indigo-600 transition-colors"
-                >
-                  <ArrowLeft className="w-3.5 h-3.5" />
-                  <span>Back to Sign In</span>
-                </Link>
+                  <div className="flex items-center justify-between pt-2">
+                    <Link to="/login" className="text-xs text-slate-400 hover:text-[#6355ec]">
+                      Cancel
+                    </Link>
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="px-8 py-2.5 rounded-full bg-[#6355ec] hover:bg-[#5244dc] text-white text-sm font-semibold shadow-md shadow-indigo-500/30 transition-all cursor-pointer"
+                    >
+                      {loading ? 'Sending...' : 'Send Reset Link'}
+                    </button>
+                  </div>
+                </form>
               </div>
-            </div>
-          )}
+            )}
+          </div>
+
+          <div className="lg:col-span-6 hidden lg:flex items-center justify-center">
+            <LoginIllustration />
+          </div>
+        </div>
+
+        <div className="pt-6 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-3">
+          <div>© Copyright QLTSGeek 2026</div>
+          <div className="flex items-center gap-6">
+            <span>Term & Condition</span>
+            <span>Privacy Policy</span>
+            <span>Help</span>
+          </div>
+          <div className="flex items-center gap-1.5">
+            <span className="w-2.5 h-2.5 rounded-full bg-[#00d2d3]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#6355ec]" />
+            <span className="w-2.5 h-2.5 rounded-full bg-[#93c5fd]" />
+          </div>
         </div>
       </div>
     </div>
