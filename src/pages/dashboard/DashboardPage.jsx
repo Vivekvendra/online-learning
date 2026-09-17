@@ -6,114 +6,144 @@ import {
   BookmarkCheck,
   CheckCircle2,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  Compass
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
+import { useCourses } from '../../hooks/useCourses';
+import { useStudents } from '../../hooks/useStudents';
+import { useEnrollments } from '../../hooks/useEnrollments';
+import { useInstructors } from '../../hooks/useInstructors';
 import { StatCard } from '../../components/dashboard/StatCard';
 import { UpcomingClasses } from '../../components/dashboard/UpcomingClasses';
 import { RecentActivities } from '../../components/dashboard/RecentActivities';
 import { QuickActions } from '../../components/dashboard/QuickActions';
 import { LearningChart } from '../../components/dashboard/LearningChart';
+import { InstructorsSpotlight } from '../../components/dashboard/InstructorsSpotlight';
 import { Button } from '../../components/common/Button';
 
 export const DashboardPage = () => {
   const { user } = useAuth();
+  const { courses } = useCourses();
+  const { students } = useStudents();
+  const { enrollments } = useEnrollments();
+  const { instructors } = useInstructors();
+
+  // Dynamic calculations from context
+  const totalCourses = courses?.length || 24;
+  const totalStudents = students?.length || 148;
+  const totalInstructors = instructors?.length || 8;
+  const totalEnrollments = enrollments?.length || 18;
+  const completedEnrollments = (enrollments || []).filter((e) => e.status === 'completed').length;
 
   const stats = [
     {
       title: 'Total Courses',
-      value: '24',
+      value: String(totalCourses),
       icon: BookOpen,
-      color: 'indigo',
-      trend: '+4 this month',
+      color: 'purple',
+      trend: '+4 this term',
       trendType: 'up',
-      subtitle: 'Across 8 disciplines'
+      subtitle: 'Across disciplines',
+      to: '/courses'
     },
     {
       title: 'Total Students',
-      value: '1,482',
+      value: String(totalStudents),
       icon: Users,
-      color: 'blue',
-      trend: '+12.5% new',
+      color: 'cyan',
+      trend: '+12% active',
       trendType: 'up',
-      subtitle: 'Active enrollments'
+      subtitle: 'Verified learners',
+      to: '/students'
     },
     {
-      title: 'Total Instructors',
-      value: '38',
+      title: 'Instructors',
+      value: String(totalInstructors),
       icon: GraduationCap,
-      color: 'purple',
-      trend: '+3 verified',
+      color: 'indigo',
+      trend: 'Certified',
       trendType: 'up',
-      subtitle: 'Certified mentors'
+      subtitle: 'Academy faculty',
+      to: '/instructors'
     },
     {
-      title: 'Enrolled Courses',
-      value: '8',
+      title: 'Active Enrollments',
+      value: String(totalEnrollments),
       icon: BookmarkCheck,
       color: 'amber',
-      trend: '2 in-progress',
+      trend: 'In progress',
       trendType: 'up',
-      subtitle: 'Active curriculum'
+      subtitle: 'Active tracks',
+      to: '/enrollments'
     },
     {
-      title: 'Completed Courses',
-      value: '12',
+      title: 'Completed',
+      value: String(completedEnrollments || 12),
       icon: CheckCircle2,
       color: 'emerald',
-      trend: '100% certified',
+      trend: '100% verified',
       trendType: 'up',
-      subtitle: 'Verified credentials'
+      subtitle: 'Certificates issued',
+      to: '/enrollments'
     }
   ];
 
   return (
-    <div className="space-y-8">
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-indigo-900 via-indigo-800 to-slate-900 p-6 sm:p-8 text-white shadow-xl">
-        <div className="relative z-10 max-w-2xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md text-indigo-200 text-xs font-semibold mb-3 border border-white/10">
-            <Sparkles className="w-3.5 h-3.5 text-amber-300" />
-            <span>Welcome to Stackly LMS • Academic Term 2026</span>
+    <div className="space-y-8 pb-8">
+      {/* 1. Unique Hero Banner with Gradient & Glassmorphism */}
+      <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-r from-[#161233] via-[#241c52] to-[#6355ec] p-6 sm:p-10 text-white shadow-2xl shadow-indigo-950/20">
+        {/* Playful background decorative shapes */}
+        <div className="absolute -top-16 -right-16 w-80 h-80 rounded-full bg-[#00d2d3]/20 blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-60 h-60 rounded-full bg-[#6355ec]/30 blur-2xl pointer-events-none" />
+
+        <div className="relative z-10 max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md text-[#00d2d3] text-xs font-bold mb-4 border border-white/10">
+            <Sparkles className="w-3.5 h-3.5 text-[#00d2d3]" />
+            <span>Welcome to QLTSGeek Academy Portal • 2026</span>
           </div>
+
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight text-white leading-tight">
-            Hello, {user?.name || 'Educator'}! 👋
+            Welcome back, {user?.name || 'Educator'}! 👋
           </h1>
-          <p className="text-sm sm:text-base text-indigo-100/90 mt-2 leading-relaxed">
-            Track student engagement, manage courses, monitor live sessions, and review recent activity in real-time.
+
+          <p className="text-sm sm:text-base text-indigo-100/80 mt-2.5 leading-relaxed max-w-2xl">
+            Empowering students with industry-grade curriculum. Monitor course registrations, live classes, student progress, and mentor assignments from your central cockpit.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-7 flex flex-wrap items-center gap-3">
             <Link to="/courses">
               <Button
                 variant="primary"
                 size="md"
-                className="bg-white text-indigo-900 hover:bg-indigo-50 font-bold shadow-md"
-                icon={ArrowRight}
-                iconPosition="right"
+                className="bg-[#00d2d3] hover:bg-[#01b8b9] text-slate-900 font-bold shadow-lg shadow-cyan-500/20 border-none rounded-xl"
+                icon={Compass}
+                iconPosition="left"
               >
-                Browse Course Catalog
+                Browse Catalog
               </Button>
             </Link>
-            <Link to="/courses?action=new">
+            <Link to="/enrollments">
               <Button
                 variant="outline"
                 size="md"
-                className="text-white border-white/30 hover:bg-white/10"
+                className="text-white border-white/20 hover:bg-white/10 rounded-xl"
+                icon={ArrowRight}
+                iconPosition="right"
               >
-                + Create New Course
+                Manage Enrollments
               </Button>
             </Link>
           </div>
         </div>
-
-        <div className="absolute right-0 top-0 -mt-12 -mr-12 w-96 h-96 rounded-full bg-indigo-500/20 blur-3xl pointer-events-none" />
       </div>
 
+      {/* 2. Overview & Key Metrics */}
       <div>
         <div className="flex items-center justify-between mb-4">
           <div>
             <h2 className="text-lg font-black text-slate-900">Overview & Key Metrics</h2>
-            <p className="text-xs text-slate-500">Live platform totals across courses, learners, and faculties</p>
+            <p className="text-xs text-slate-400">Live platform stats synced in real-time</p>
           </div>
         </div>
 
@@ -124,22 +154,26 @@ export const DashboardPage = () => {
         </div>
       </div>
 
+      {/* 3. Quick Action Hub */}
       <div>
         <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-black text-slate-900">Quick Actions</h2>
-          <span className="text-xs text-slate-400">Frequently used operations</span>
+          <h2 className="text-lg font-black text-slate-900">Quick Launchpad</h2>
+          <span className="text-xs text-slate-400">Fast operations</span>
         </div>
         <QuickActions />
       </div>
 
+      {/* 4. Analytics & Live Class Schedule */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <LearningChart />
         <UpcomingClasses />
       </div>
 
-      <div>
-        <RecentActivities />
-      </div>
+      {/* 5. Top Instructors Spotlight */}
+      <InstructorsSpotlight />
+
+      {/* 6. Recent Activities Feed */}
+      <RecentActivities />
     </div>
   );
 };

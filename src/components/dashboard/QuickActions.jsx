@@ -1,40 +1,39 @@
 import { Link } from 'react-router-dom';
-import { BookPlus, Compass, BookOpenCheck, BarChart2 } from 'lucide-react';
+import { BookOpen, UserPlus, BookmarkPlus, GraduationCap } from 'lucide-react';
 
-export const QuickActions = ({ onOpenAddCourse }) => {
+export const QuickActions = () => {
   const actions = [
     {
-      title: 'Explore Courses',
-      description: 'Search & filter full course catalog',
-      icon: Compass,
+      title: 'Course Catalog',
+      description: 'Explore, filter & create courses',
+      icon: BookOpen,
       to: '/courses',
-      color: 'from-blue-600 to-indigo-600',
-      badge: 'Active'
+      gradient: 'from-[#6355ec] to-[#8b7ff5]',
+      badge: 'Courses'
     },
     {
-      title: 'Add New Course',
-      description: 'Create & publish a new curriculum',
-      icon: BookPlus,
-      onClick: onOpenAddCourse,
-      to: '/courses?action=new',
-      color: 'from-indigo-600 to-purple-600',
-      badge: 'Action'
+      title: 'Student Directory',
+      description: 'Register & manage learners',
+      icon: UserPlus,
+      to: '/students',
+      gradient: 'from-[#00d2d3] to-[#01a3a4]',
+      badge: 'Students'
     },
     {
-      title: 'Enrolled Courses',
-      description: 'Resume learning where you left off',
-      icon: BookOpenCheck,
-      to: '/courses?view=enrolled',
-      color: 'from-emerald-600 to-teal-600',
-      badge: 'Student'
+      title: 'Course Enrollments',
+      description: 'Track progress & assign courses',
+      icon: BookmarkPlus,
+      to: '/enrollments',
+      gradient: 'from-emerald-500 to-teal-600',
+      badge: 'Enroll'
     },
     {
-      title: 'View Analytics',
-      description: 'Inspect overall metrics and progress',
-      icon: BarChart2,
-      to: '/dashboard',
-      color: 'from-amber-500 to-orange-600',
-      badge: 'Metrics'
+      title: 'Faculty & Mentors',
+      description: 'Manage instructors & assignments',
+      icon: GraduationCap,
+      to: '/instructors',
+      gradient: 'from-amber-400 to-orange-500',
+      badge: 'Faculty'
     }
   ];
 
@@ -46,20 +45,20 @@ export const QuickActions = ({ onOpenAddCourse }) => {
           <Link
             key={act.title}
             to={act.to}
-            className="group relative overflow-hidden rounded-2xl bg-white p-5 border border-slate-200/80 shadow-xs hover:shadow-md hover:border-indigo-200 transition-all duration-200 text-left"
+            className="group relative overflow-hidden rounded-2xl bg-white p-5 border border-slate-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all duration-300 text-left"
           >
             <div className="flex items-center justify-between mb-3">
-              <div className={`w-10 h-10 rounded-xl bg-gradient-to-tr ${act.color} text-white flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform`}>
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-tr ${act.gradient} text-white flex items-center justify-center shadow-md group-hover:scale-110 transition-transform`}>
                 <Icon className="w-5 h-5" />
               </div>
-              <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+              <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-600 group-hover:bg-purple-50 group-hover:text-[#6355ec] transition-colors">
                 {act.badge}
               </span>
             </div>
-            <h4 className="text-sm font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <h4 className="text-sm font-black text-slate-900 group-hover:text-[#6355ec] transition-colors">
               {act.title}
             </h4>
-            <p className="text-xs text-slate-500 mt-1 leading-snug">
+            <p className="text-xs text-slate-400 mt-1 leading-relaxed">
               {act.description}
             </p>
           </Link>

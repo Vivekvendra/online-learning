@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Eye, EyeOff, Sparkles } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import { LoginIllustration } from '../../components/auth/LoginIllustration';
 
 export const LoginPage = () => {
-  const { login, loading, demoUsers } = useAuth();
+  const { login, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/dashboard';
@@ -16,7 +16,6 @@ export const LoginPage = () => {
   const {
     register,
     handleSubmit,
-    setValue,
     formState: { errors }
   } = useForm({
     defaultValues: {
@@ -30,12 +29,6 @@ export const LoginPage = () => {
     if (res.success) {
       navigate(from, { replace: true });
     }
-  };
-
-  const fillDemoCredentials = (index = 0) => {
-    const demo = demoUsers[index] || demoUsers[0];
-    setValue('email', demo.email, { shouldValidate: true });
-    setValue('password', demo.password, { shouldValidate: true });
   };
 
   return (
@@ -202,34 +195,6 @@ export const LoginPage = () => {
                 </button>
               </div>
             </form>
-
-            {/* Quick Demo Credentials Autofill */}
-            <div className="mt-8 pt-5 border-t border-slate-100">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-[#00d2d3]" />
-                  1-Click Demo Fill
-                </span>
-              </div>
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => fillDemoCredentials(0)}
-                  className="py-2 px-3 rounded-xl bg-[#f8f9fd] hover:bg-purple-50 hover:border-[#6355ec] border border-slate-100 text-[11px] font-semibold text-slate-700 text-left transition-colors cursor-pointer"
-                >
-                  <div className="font-bold text-slate-900">Admin/Instructor</div>
-                  <div className="text-slate-400 truncate text-[10px]">admin@stackly.edu</div>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => fillDemoCredentials(1)}
-                  className="py-2 px-3 rounded-xl bg-[#f8f9fd] hover:bg-purple-50 hover:border-[#6355ec] border border-slate-100 text-[11px] font-semibold text-slate-700 text-left transition-colors cursor-pointer"
-                >
-                  <div className="font-bold text-slate-900">Student</div>
-                  <div className="text-slate-400 truncate text-[10px]">alex.rivera@stackly.edu</div>
-                </button>
-              </div>
-            </div>
           </div>
 
           {/* Right Column: Custom Learning Desk Illustration */}

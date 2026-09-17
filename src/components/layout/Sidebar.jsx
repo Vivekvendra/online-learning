@@ -8,8 +8,7 @@ import {
   FileCheck2,
   BarChart3,
   LogOut,
-  X,
-  Sparkles
+  X
 } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
@@ -116,24 +115,6 @@ export const Sidebar = ({ isOpen, onClose }) => {
               </NavLink>
             );
           })}
-
-          <div className="pt-6 px-3 pb-2 text-[11px] font-bold uppercase tracking-wider text-indigo-400/60">
-            Quick Status
-          </div>
-
-          <div className="p-4 rounded-2xl bg-gradient-to-br from-indigo-950/80 to-[#1e174b] border border-indigo-800/40 text-indigo-200">
-            <div className="flex items-center gap-2 text-[#00d2d3] font-bold text-xs mb-1">
-              <Sparkles className="w-4 h-4" />
-              <span>Modules 1 - 6 Active</span>
-            </div>
-            <p className="text-xs text-indigo-300/70 leading-relaxed mb-3">
-              Full CRUD enabled for Courses, Students, Enrollments, and Instructors.
-            </p>
-            <div className="flex items-center gap-1.5 text-[10px] font-semibold text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Local Storage Synced</span>
-            </div>
-          </div>
         </div>
 
         {/* User Session Footer */}
