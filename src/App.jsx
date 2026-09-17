@@ -3,6 +3,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthProvider } from './context/AuthContext';
 import { CourseProvider } from './context/CourseContext';
+import { StudentProvider } from './context/StudentContext';
+import { EnrollmentProvider } from './context/EnrollmentContext';
+import { InstructorProvider } from './context/InstructorContext';
 import { AppRoutes } from './routes/AppRoutes';
 
 function App() {
@@ -10,19 +13,25 @@ function App() {
     <BrowserRouter>
       <AuthProvider>
         <CourseProvider>
-          <AppRoutes />
-          <ToastContainer
-            position="top-right"
-            autoClose={3500}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="light"
-          />
+          <StudentProvider>
+            <EnrollmentProvider>
+              <InstructorProvider>
+                <AppRoutes />
+                <ToastContainer
+                  position="top-right"
+                  autoClose={3500}
+                  hideProgressBar={false}
+                  newestOnTop
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                  theme="light"
+                />
+              </InstructorProvider>
+            </EnrollmentProvider>
+          </StudentProvider>
         </CourseProvider>
       </AuthProvider>
     </BrowserRouter>

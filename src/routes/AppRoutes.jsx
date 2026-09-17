@@ -6,6 +6,10 @@ import { DashboardLayout } from '../components/layout/DashboardLayout';
 import { DashboardPage } from '../pages/dashboard/DashboardPage';
 import { CourseListPage } from '../pages/courses/CourseListPage';
 import { CourseDetailPage } from '../pages/courses/CourseDetailPage';
+import { StudentListPage } from '../pages/students/StudentListPage';
+import { EnrollmentListPage } from '../pages/enrollments/EnrollmentListPage';
+import { InstructorListPage } from '../pages/instructors/InstructorListPage';
+import { InstructorProfilePage } from '../pages/instructors/InstructorProfilePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
 import { ProtectedRoute } from './ProtectedRoute';
 
@@ -22,6 +26,10 @@ export const AppRoutes = () => {
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/courses" element={<CourseListPage />} />
           <Route path="/courses/:id" element={<CourseDetailPage />} />
+          <Route path="/students" element={<StudentListPage />} />
+          <Route path="/enrollments" element={<EnrollmentListPage />} />
+          <Route path="/instructors" element={<InstructorListPage />} />
+          <Route path="/instructors/:id" element={<InstructorProfilePage />} />
         </Route>
       </Route>
 
